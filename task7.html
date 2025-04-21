@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Train Animation</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #train {
+            width: 200px; /* Adjust as needed */
+            position: relative; /* To allow left positioning */
+            left: 0;
+        }
+
+        .controls {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="train" src="https://thumbs.dreamstime.com/b/handsome-machinist-cartoon-uo-train-smile-waving-pict-handsome-machinist-cartoon-uo-train-smile-waving-102189491.jpg" alt="Train">
+        <div class="controls">
+            <button id="startButton">Start</button>
+            <button id="stopButton">Stop</button>
+        </div>
+    </div>
+
+    <script>
+        const train = document.getElementById('train');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+
+        let animationInterval;
+        let currentPosition = 0;
+        const speed = 5; // Adjust for faster/slower movement
+
+        startButton.addEventListener('click', () => {
+            if (!animationInterval) {
+                animationInterval = setInterval(() => {
+                    currentPosition += speed;
+                    train.style.left = currentPosition + 'px';
+                }, 50); // Adjust the interval for smoother/choppier animation
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            clearInterval(animationInterval);
+            animationInterval = null;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f3;
+      padding: 30px;
+    }
+
+    .container {
+      background: white;
+      padding: 25px 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .checkbox-group, .radio-group {
+      margin-top: 10px;
+    }
+
+    .submit-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      margin-top: 20px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .link a {
+      color: blue;
+      text-decoration: none;
+    }
+
+    .link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Registration Form</h2>
+    <form id="regForm">
+      <label for="fname">First Name</label>
+      <input type="text" id="fname" name="fname" />
+      <div class="error" id="fnameError"></div>
+
+      <label for="lname">Last Name</label>
+      <input type="text" id="lname" name="lname" />
+      <div class="error" id="lnameError"></div>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" />
+      <div class="error" id="emailError"></div>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" />
+
+      <label for="repassword">Re-enter Password</label>
+      <input type="password" id="repassword" name="repassword" />
+      <div class="error" id="passwordError"></div>
+
+      <label>Gender</label>
+      <div class="radio-group">
+        <input type="radio" id="male" name="gender" value="male" /> Male
+        <input type="radio" id="female" name="gender" value="female" /> Female
+      </div>
+
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" />
+
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" name="phone" />
+
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="3"></textarea>
+
+      <label for="state">State</label>
+      <select id="state" name="state">
+        <option value="">Select State</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+      </select>
+
+      <label for="country">Country</label>
+      <select id="country" name="country">
+        <option value="">Select Country</option>
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+        <option value="UK">UK</option>
+      </select>
+
+      <label>Languages Known</label>
+      <div class="checkbox-group">
+        <input type="checkbox" name="language" value="English" /> English
+        <input type="checkbox" name="language" value="Kannada" /> Kannada
+        <input type="checkbox" name="language" value="Hindi" /> Hindi
+        <input type="checkbox" name="language" value="Telugu" /> Telugu
+      </div>
+
+      <div class="checkbox-group" style="margin-top: 15px;">
+        <input type="checkbox" id="declare" name="declare" />
+        I hereby declare all the given details are true
+      </div>
+
+      <button type="submit" class="submit-btn">Register</button>
+    </form>
+
+    <div class="link">
+      <p>Login to<a href="https://ethnus.com/" target="_blank"> Ethnus </a> Website.</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("regForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Clear previous errors
+      document.getElementById("fnameError").innerText = "";
+      document.getElementById("lnameError").innerText = "";
+      document.getElementById("emailError").innerText = "";
+      document.getElementById("passwordError").innerText = "";
+
+      let fname = document.getElementById("fname").value.trim();
+      let lname = document.getElementById("lname").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let pass = document.getElementById("password").value.trim();
+      let repass = document.getElementById("repassword").value.trim();
+
+      let valid = true;
+
+      const namePattern = /^[A-Za-z]+$/;
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+      if (!namePattern.test(fname)) {
+        document.getElementById("fnameError").innerText = "Poor name (Only letters allowed)";
+        valid = false;
+      }
+
+      if (!namePattern.test(lname)) {
+        document.getElementById("lnameError").innerText = "Poor name (Only letters allowed)";
+        valid = false;
+      }
+
+      if (!emailPattern.test(email)) {
+        document.getElementById("emailError").innerText = "Poor email format";
+        valid = false;
+      }
+
+      if (pass !== repass) {
+        document.getElementById("passwordError").innerText = "Passwords do not match";
+        valid = false;
+      }
+
+      if (valid) {
+        alert("Registration successful!");
+        document.getElementById("regForm").reset();
+      }
+    });
+  </script>
+</body>
+</html>

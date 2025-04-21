@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Date and Time</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        button {
+            padding: 10px;
+            margin-top: 15px;
+            width: 200px;
+            cursor: pointer;
+            display: block;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Show Date and Time</h1>
+
+    <button onclick="showDate()">Show Date</button>
+    <div id="dateResult" class="result"></div>
+
+    <button onclick="showTime()">Show Time (India)</button>
+    <div id="timeResult" class="result"></div>
+
+    <script>
+        // Function to show the current date in "Tue Mar 06 2025" format
+        function showDate() {
+            let date = new Date();
+            let dateString = date.toDateString(); // Formats the date like: "Tue Mar 06 2025"
+            document.getElementById('dateResult').textContent = "The Date is: " + dateString;
+        }
+
+        // Function to show the current time in the format: "23:24:26 GMT+0530 (IST)"
+        function showTime() {
+            let date = new Date();
+            // Get the time with the correct format
+            let timeString = date.toLocaleTimeString('en-IN', { 
+                hour12: false, 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit'
+            });
+            // Getting the timezone offset for India (IST)
+            let timeZoneOffset = 'GMT+0530 (IST)';
+            document.getElementById('timeResult').textContent = `The Time (India) is: ${timeString} ${timeZoneOffset}`;
+        }
+    </script>
+</body>
+</html>

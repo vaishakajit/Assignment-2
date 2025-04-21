@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabetical Order of String</title>
+</head>
+<body>
+    <h1>Sort Letters in Alphabetical Order</h1>
+    <p>Original String: <span id="original-string"></span></p>
+    <p>Sorted String: <span id="sorted-string"></span></p>
+
+    <script>
+        function sortStringAlphabetically(str) {
+            // Convert to array, sort alphabetically, and join back into a string
+            return str.split('').sort().join('');
+        }
+
+        let inputString = 'webmaster';
+        let sortedString = sortStringAlphabetically(inputString);
+
+        // Display results on the page
+        document.getElementById('original-string').textContent = inputString;
+        document.getElementById('sorted-string').textContent = sortedString;
+
+        // Also log to console (optional)
+        console.log(sortedString); // Output: 'abeemrstw'
+    </script>
+</body>
+</html>

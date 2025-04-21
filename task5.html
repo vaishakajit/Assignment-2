@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input:focus, textarea:focus {
+            outline-color: #4A90E2;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .error-field {
+            border-color: red;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contact Form</h1>
+
+    <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+        <div id="nameError" class="error"></div>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
+        <div id="emailError" class="error"></div>
+
+        <label for="website">Website:</label>
+        <input type="url" id="website" name="website" />
+        <div id="websiteError" class="error"></div>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea>
+        <div id="messageError" class="error"></div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Form validation function
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission for validation
+
+            // Reset errors and field outlines
+            resetErrors();
+
+            let isValid = true;
+
+            // Name validation
+            const name = document.getElementById('name');
+            if (!name.value.trim()) {
+                isValid = false;
+                showError('name', 'This field is required');
+            }
+
+            // Email validation
+            const email = document.getElementById('email');
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!email.value.trim()) {
+                isValid = false;
+                showError('email', 'A valid email address is required');
+            } else if (!emailRegex.test(email.value)) {
+                isValid = false;
+                showError('email', 'Please enter a valid email address');
+            }
+
+            // Website validation
+            const website = document.getElementById('website');
+            const websiteRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*$/;
+            if (!website.value.trim()) {
+                isValid = false;
+                showError('website', 'A valid URL is required');
+            } else if (!websiteRegex.test(website.value)) {
+                isValid = false;
+                showError('website', 'Please enter a valid URL');
+            }
+
+            // Message validation
+            const message = document.getElementById('message');
+            if (!message.value.trim()) {
+                isValid = false;
+                showError('message', 'This field is required');
+            }
+
+            // If the form is valid, you can proceed with submission (e.g., send data to server)
+            if (isValid) {
+                alert('Form submitted successfully!');
+            }
+        });
+
+        // Function to display error message and highlight the field
+        function showError(field, errorMessage) {
+            const errorElement = document.getElementById(field + 'Error');
+            errorElement.textContent = errorMessage;
+            document.getElementById(field).classList.add('error-field');
+        }
+
+        // Function to reset errors
+        function resetErrors() {
+            const fields = ['name', 'email', 'website', 'message'];
+            fields.forEach(function(field) {
+                document.getElementById(field + 'Error').textContent = '';
+                document.getElementById(field).classList.remove('error-field');
+            });
+        }
+    </script>
+
+</body>
+</html>
